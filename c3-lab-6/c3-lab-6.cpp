@@ -159,7 +159,19 @@ void BSTNode<T>::preOrderDisplay(ostream& out) const
 
 	/**
 	 *  ***** Write me! *****
+	 *	Self, Left, Right
 	 */
+	out << _data;
+	out << ", ";
+	if (_left != nullptr)
+	{
+		_left->preOrderDisplay(out);
+		out << ", ";
+	}
+	if (_right != nullptr)
+	{
+		_right->inOrderDisplay(out);
+	}
 }
 
 template<typename T>
@@ -170,7 +182,20 @@ void BSTNode<T>::postOrderDisplay(ostream& out) const
 
 	/**
 	 *  ***** Write me! *****
+	 *	Left, Right, Self
 	 */
+	if (_left != nullptr)
+	{
+		_left->preOrderDisplay(out);
+		out << ", ";
+	}
+	if (_right != nullptr)
+	{
+		_right->inOrderDisplay(out);
+		out << ", ";
+	}
+	out << _data;
+
 }
 
 
