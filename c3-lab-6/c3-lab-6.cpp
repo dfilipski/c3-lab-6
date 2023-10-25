@@ -96,11 +96,38 @@ template<typename T>
 void BSTNode<T>::insert(const T& data)
 {
 	// comment out the next line when you've completed this function!
-	cout << "BSTNode<T>::insert called with data == " << data << endl;
+	// cout << "BSTNode<T>::insert called with data == " << data << endl;
 
 	/**
 	 *  ***** Write me! *****
 	 */
+
+	if (data < _data)
+	{
+		// if there is a left child
+		if (_left != nullptr)
+		{
+			_left->insert(data);
+		}
+		// there is no left child insert the data as a new node to the left
+		addLeft(data);
+	}
+	else if (data == _data)
+	{
+		// the value is already in the tree
+		// do nothing
+	}
+	else
+	{
+		//The value is greater than _data
+		// if there is a right child
+		if (_right != nullptr)
+		{
+			_right->insert(data);
+		}
+		// there is no right child insert the data as a new node to the right
+		addRight(data);
+	}
 }
 
 
