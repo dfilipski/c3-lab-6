@@ -40,9 +40,9 @@ public:
 	// ***** in order to switch to pre- or post-order display
 	friend ostream& operator<< (ostream& out, const BSTNode<T>& b)
 	{
-		//b.inOrderDisplay(out); return out;
+		b.inOrderDisplay(out); return out;
 		//b.preOrderDisplay(out); return out;
-		b.postOrderDisplay(out); return out;
+		//b.postOrderDisplay(out); return out;
 	}
 
 private:
