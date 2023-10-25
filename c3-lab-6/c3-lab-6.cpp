@@ -40,7 +40,9 @@ public:
 	// ***** in order to switch to pre- or post-order display
 	friend ostream& operator<< (ostream& out, const BSTNode<T>& b)
 	{
-		b.inOrderDisplay(out); return out;
+		//b.inOrderDisplay(out); return out;
+		//b.preOrderDisplay(out); return out;
+		b.postOrderDisplay(out); return out;
 	}
 
 private:
@@ -109,8 +111,11 @@ void BSTNode<T>::insert(const T& data)
 		{
 			_left->insert(data);
 		}
+		else
+		{
+			addLeft(data);
+		}
 		// there is no left child insert the data as a new node to the left
-		addLeft(data);
 	}
 	else if (data == _data)
 	{
@@ -125,8 +130,11 @@ void BSTNode<T>::insert(const T& data)
 		{
 			_right->insert(data);
 		}
+		else
+		{
+			addRight(data);
+		}
 		// there is no right child insert the data as a new node to the right
-		addRight(data);
 	}
 }
 
@@ -155,21 +163,21 @@ template<typename T>
 void BSTNode<T>::preOrderDisplay(ostream& out) const
 {
 	// comment out the next line when you've completed this function!
-	cout << "BSTNode<T>::preOrderDisplay called\n";
+	//cout << "BSTNode<T>::preOrderDisplay called\n";
 
 	/**
 	 *  ***** Write me! *****
 	 *	Self, Left, Right
 	 */
 	out << _data;
-	out << ", ";
 	if (_left != nullptr)
 	{
-		_left->preOrderDisplay(out);
 		out << ", ";
+		_left->preOrderDisplay(out);
 	}
 	if (_right != nullptr)
 	{
+		out << ", ";
 		_right->inOrderDisplay(out);
 	}
 }
@@ -178,7 +186,7 @@ template<typename T>
 void BSTNode<T>::postOrderDisplay(ostream& out) const
 {
 	// comment out the next line when you've completed this function!
-	cout << "BSTNode<T>::postOrderDisplay called\n";
+	//cout << "BSTNode<T>::postOrderDisplay called\n";
 
 	/**
 	 *  ***** Write me! *****
