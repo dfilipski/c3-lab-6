@@ -1,6 +1,7 @@
 #undef debug
 
 #include <iostream>
+#include <list>
 #include <string>
 
 using namespace std;
@@ -44,6 +45,8 @@ public:
 		//b.preOrderDisplay(out); return out;
 		//b.postOrderDisplay(out); return out;
 	}
+
+	void listify(list<T>& l) const;
 
 private:
 	T _data;
@@ -206,6 +209,22 @@ void BSTNode<T>::postOrderDisplay(ostream& out) const
 
 }
 
+template <typename T>
+void BSTNode<T>::listify(list<T>& l) const
+{
+	if (_left != nullptr)
+	{
+		_left->listify(l);
+	}
+	auto const val = _data;
+	l.push_back(val);
+
+	if (_right != nullptr)
+	{
+		_right->listify(l);
+	}
+}
+
 
 int main(void)
 {
@@ -214,7 +233,36 @@ int main(void)
 	iroot.insert(20);
 	iroot.insert(200);
 	iroot.insert(300);
+
 	cout << "iroot == " << iroot << endl;
+
+	list<int> irootList;
+	iroot.listify(irootList);
+
+
+	cout << "\nCreating irootList via iroot.listify\n\n";
+	cout << "irootList (forward iterator) == ";
+	for (auto it = irootList.begin(); it != irootList.end(); ++it)
+	{
+		cout << *it << " ";
+	}
+	cout << endl;
+
+	cout << "irootList (reverse iterator) == ";
+	for (auto it = irootList.rbegin(); it != irootList.rend(); ++it)
+	{
+		cout << *it << " ";
+	}
+	cout << endl;
+
+	cout << "irootList (ranged for loop) == ";
+	for (auto num : irootList)
+	{
+		cout << num << " ";
+	}
+	cout << endl;
+
+	cout << "\nCreating srootList via sroot.listify\n\n";
 
 	BSTNode<string> sroot("Sunday");
 	sroot.insert("Monday");
@@ -223,7 +271,30 @@ int main(void)
 	sroot.insert("Thursday");
 	sroot.insert("Friday");
 	sroot.insert("Saturday");
-	cout << "sroot == " << sroot << endl;
+
+	list<string> srootList;
+	sroot.listify(srootList);
+
+	cout << "srootList (forward iterator) == ";
+	for (auto it = srootList.begin(); it != srootList.end(); ++it)
+	{
+		cout << *it << " ";
+	}
+	cout << endl;
+
+	cout << "srootList (reverse iterator) == ";
+	for (auto it = srootList.rbegin(); it != srootList.rend(); ++it)
+	{
+		cout << *it << " ";
+	}
+	cout << endl;
+
+	cout << "srootList (ranged for loop) == ";
+	for (auto day : srootList)
+	{
+		cout << day << " ";
+	}
+	cout << endl;
 
 #ifdef debug	
 	BSTNode<int> iroot2(iroot); // use copy constructor
