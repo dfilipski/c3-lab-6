@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <list>
+#include <map>
 #include <string>
 
 using namespace std;
@@ -256,7 +257,7 @@ int main(void)
 	cout << endl;
 
 	cout << "irootList (ranged for loop) == ";
-	for (auto num : irootList)
+	for (auto const& num : irootList)
 	{
 		cout << num << " ";
 	}
@@ -290,9 +291,51 @@ int main(void)
 	cout << endl;
 
 	cout << "srootList (ranged for loop) == ";
-	for (auto day : srootList)
+	for (auto const& day : srootList)
 	{
 		cout << day << " ";
+	}
+	cout << endl;
+
+	BSTNode<int> iroot4;
+	iroot4.insert(1000);
+	iroot4.insert(2000);
+	iroot4.insert(3000);
+	iroot4.insert(4000);
+	iroot4.insert(5000);
+
+	cout << "\niroot4 == " << iroot4 << endl;
+
+	cout << "\nCreating iroot4List via iroot4.listify\n\n";
+	list<int> iroot4List;
+	iroot4.listify(iroot4List);
+
+	map<string, list<int>> mi;
+	mi.insert(std::pair<string, list<int>>("irootList", irootList));
+	mi.insert(std::pair<string, list<int>>("iroot4List", iroot4List));
+
+	cout << "Contents of map<string, list<int>> mi (using ranged for loops):\n";
+	for (auto const& kvPair : mi)
+	{
+		cout << kvPair.first << ": ";
+		for (auto const& v : kvPair.second)
+		{
+			cout << v << " ";
+		}
+		cout << endl;
+	}
+
+	cout << "\nUsing map index operator:\n";
+	cout << "mi[\"irootList\"] == ";
+	for (auto v : mi["irootList"])
+	{
+		cout << v << " ";
+	}
+	cout << endl;
+	cout << "mi[\"iroot4List\"] == ";
+	for (auto v : mi["iroot4List"])
+	{
+		cout << v << " ";
 	}
 	cout << endl;
 
